@@ -40,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "uppercase",
     letterSpacing: ".1rem",
   },
+  content__heading3: {
+    fontSize: "0.93rem",
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+  },
   content_calculator: {
     padding: "1rem 2rem",
     display: "flex",
@@ -78,6 +83,9 @@ const useStyles = makeStyles((theme) => ({
     width: "7.8rem",
     fontFamily: "Roboto",
     fontSize: "0.8rem",
+  },
+  content_results: {
+    padding: "1rem 2rem",
   },
 }));
 

@@ -2,6 +2,7 @@ import React from "react";
 import Apple from "../../images/apple.png";
 import SelectBox from "../common/SelectBox/SelectBox";
 import ResultBox from "../common/ResultBox/ResultBox";
+import TableBox from "../common/Table/Table";
 import Button from "@material-ui/core/Button";
 import useStyles from "./Style";
 
@@ -43,8 +44,8 @@ const Content = () => {
             <div className={classes.calculator__resultBoxes}>
               <ResultBox label="CO" sub="2" />
               <ResultBox label="CH" sub="4" />
-              <ResultBox label="N" sub="2" second_label="2" />
-              <ResultBox label="CO" sub="2" />
+              <ResultBox label="N" sub="2" second_label="O" />
+              <ResultBox label="CO" sub="2" third_label="e" />
             </div>
             <div className={classes.calculator__buttons}>
               <Button
@@ -64,7 +65,12 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <div className={classes.content_results}></div>
+        <div className={classes.content_results}>
+          <h3 className={classes.content__heading3}>Hesaplamalar</h3>
+          <div>
+            <TableBox />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     top: 0,
     left: 0,
-    padding: "0.625rem",
+    padding: "0.54rem",
     textShadow: "0 1px 0 rgba(19, 74, 70, 0.4)",
     background: " #0D1840",
     borderTopLeftRadius: "1.375rem",
