@@ -11,6 +11,16 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiTableCell-head": {
       color: "#FFFFFF",
     },
+    "& .MuiButton-root": {
+      backgroundColor: "#0D1840",
+      borderRadius: "0.375rem",
+      width: "5.3rem",
+      height: "1.25rem",
+      fontFamily: "Roboto",
+      fontSize: "0.68rem",
+      marginBottom: "0.2rem",
+      color: "#fff",
+    },
   },
   table__header: {
     backgroundColor: " #0D1840",

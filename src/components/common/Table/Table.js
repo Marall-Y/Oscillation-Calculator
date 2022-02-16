@@ -53,20 +53,20 @@ const TableBox = () => {
               <TableCell align="center"></TableCell>
               <TableCell align="center"></TableCell>
               <TableCell align="center">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.calculator__button}
-                >
-                  Sil
-                </Button>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.calculator__button}
-                >
-                  Düzenle
-                </Button>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <Button
+                    variant="contained"
+                    className={classes.calculator__button}
+                  >
+                    Sil
+                  </Button>
+                  <Button
+                    variant="contained"
+                    className={classes.calculator__button}
+                  >
+                    Düzenle
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           </TableBody>
