@@ -18,7 +18,6 @@ const TableBox = () => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead className={classes.table__header}>
             <TableRow className={classes.table__headerRow}>
-              <TableCell>Paper</TableCell>
               <TableCell align="center">Facilty ID</TableCell>
               <TableCell align="center">Year</TableCell>
               <TableCell align="center">Fuel</TableCell>
@@ -43,7 +42,6 @@ const TableBox = () => {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row"></TableCell>
-              <TableCell align="center"></TableCell>
               <TableCell align="center"></TableCell>
               <TableCell align="center"></TableCell>
               <TableCell align="center"></TableCell>

@@ -8,7 +8,7 @@ const TextBox = ({ label }) => {
 
   return (
     <div>
-      <label for="styledSelect1">
+      <label htmlFor="styledSelect1">
         {label}
         <div className={classes.custom_container}>
           <div className={classes.custom_select}>

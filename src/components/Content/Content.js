@@ -8,6 +8,13 @@ import Button from "@material-ui/core/Button";
 import useStyles from "./Style";
 
 const Content = () => {
+  const facilityIDs = [1, 2, 3, 4];
+  const years = [1994, 1998, 2002, 2009, 2016, 2022];
+  const activityTypes = [
+    { id: 4, type: "Distance Activity" },
+    { id: 5, type: "Fuel Use" },
+  ];
+
   const classes = useStyles();
 
   return (
@@ -28,11 +35,11 @@ const Content = () => {
               doldurun:
             </p>
             <div className={classes.calculator__selectBoxes}>
-              <SelectBox label="Facility ID" />
-              <SelectBox label="Year" />
-              <SelectBox label="Activity Type" />
-              <SelectBox label="Foul Source" />
-              <SelectBox label="Vehicle Type" />
+              <SelectBox label="Facility ID" data={facilityIDs} />
+              <SelectBox label="Year" data={years} />
+              <SelectBox label="Activity Type" data={activityTypes} />
+              {/* <SelectBox label="Fule Source" /> */}
+              {/* <SelectBox label="Vehicle Type" /> */}
               <TextBox label="Amount of Activity" />
             </div>
           </div>
