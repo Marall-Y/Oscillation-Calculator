@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import MobileCombustion from "./pages/MobileCombustion/MobileCombustion";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.StrictMode>
+      <CssBaseline>
+        <Router>
+          <div>
+            <Routes>
+              <Route path="/" element={<MobileCombustion />} />
+            </Routes>
+          </div>
+        </Router>
+      </CssBaseline>
+    </React.StrictMode>
   );
-}
+};
 
 export default App;
