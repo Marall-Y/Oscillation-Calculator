@@ -61,6 +61,9 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "Robot",
       fontWeight: "600",
     },
+    "& .MuiListSubheader-sticky": {
+      position: "unset",
+    },
 
     "& .MuiListItemIcon-root": {
       minWidth: "1.56rem",
@@ -68,6 +71,13 @@ const useStyles = makeStyles((theme) => ({
   },
   nested: {
     fontSize: "0.87rem",
+  },
+  logo: {
+    width: "5.81rem",
+  },
+  logo__box: {
+    textAlign: "center",
+    marginTop: "1.5rem",
   },
 }));
 

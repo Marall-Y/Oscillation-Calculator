@@ -3,6 +3,7 @@ import Apple from "../../images/apple.png";
 import SelectBox from "../common/SelectBox/SelectBox";
 import ResultBox from "../common/ResultBox/ResultBox";
 import TableBox from "../common/Table/Table";
+import TextBox from "../common/TextBox/TextBox";
 import Button from "@material-ui/core/Button";
 import useStyles from "./Style";
 
@@ -32,7 +33,7 @@ const Content = () => {
               <SelectBox label="Activity Type" />
               <SelectBox label="Foul Source" />
               <SelectBox label="Vehicle Type" />
-              <SelectBox label="Amount of Activity" />
+              <TextBox label="Amount of Activity" />
             </div>
           </div>
           <div className={classes.calculator__results}>

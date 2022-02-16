@@ -7,7 +7,7 @@ const SelectBox = ({ label }) => {
 
   return (
     <div>
-      <label for="styledSelect1" className={classes.hello}>
+      <label for="styledSelect1">
         {label}
         <div className={classes.custom_select}>
           <select

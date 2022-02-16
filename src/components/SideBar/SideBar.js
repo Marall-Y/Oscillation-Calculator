@@ -5,13 +5,15 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
+import CreateIcon from "@material-ui/icons/Create";
+import CastForEducationIcon from "@material-ui/icons/CastForEducation";
+import AssessmentIcon from "@material-ui/icons/Assessment";
+import PersonIcon from "@material-ui/icons/Person";
+import DesktopAccessDisabledIcon from "@material-ui/icons/DesktopAccessDisabled";
+import SecurityIcon from "@material-ui/icons/Security";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import PollIcon from "@material-ui/icons/Poll";
+import Logo from "../../images/logo.png";
 import useStyles from "./Style";
 
 const SideBar = () => {
@@ -49,31 +51,31 @@ const SideBar = () => {
         >
           <ListItem button>
             <ListItemIcon className={classes.list__item}>
-              <SendIcon />
+              <CastForEducationIcon />
             </ListItemIcon>
             <ListItemText primary="Eğitimler" />
           </ListItem>
           <ListItem button>
             <ListItemIcon className={classes.list__item}>
-              <SendIcon />
+              <PollIcon />
             </ListItemIcon>
             <ListItemText primary="Analiz" />
           </ListItem>
           <ListItem button>
             <ListItemIcon className={classes.list__item}>
-              <SendIcon />
+              <AssessmentIcon />
             </ListItemIcon>
             <ListItemText primary="Raporlar" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <DraftsIcon />
+              <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profil" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <DraftsIcon />
+              <CreateIcon />
             </ListItemIcon>
             <ListItemText primary="TİM’e Yaz" />
           </ListItem>
@@ -95,19 +97,19 @@ const SideBar = () => {
         >
           <ListItem button>
             <ListItemIcon>
-              <SendIcon />
+              <DesktopAccessDisabledIcon />
             </ListItemIcon>
             <ListItemText primary="Yetkilendirme" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <DraftsIcon />
+              <VpnKeyIcon />
             </ListItemIcon>
             <ListItemText primary="Şifremi Değiştir" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
-              <DraftsIcon />
+              <SecurityIcon />
             </ListItemIcon>
             <ListItemText
               primary="Gizlilik Politikası
@@ -115,6 +117,9 @@ const SideBar = () => {
             />
           </ListItem>
         </List>
+        <div className={classes.logo__box}>
+          <img src={Logo} className={classes.logo} />
+        </div>
       </div>
     </div>
   );
