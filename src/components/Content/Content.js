@@ -111,12 +111,6 @@ const Content = () => {
     }
   }, [finalResponse]);
 
-  // useEffect(() => {
-  //   if (Object.keys(preSubmmitedData).length !== 0) {
-  //     submittedData.push(preSubmmitedData);
-  //   }
-  // }, [preSubmmitedData]);
-
   const ResetHandler = () => {
     setSelectedId("");
     setFacilityIds([]);
@@ -236,7 +230,10 @@ const Content = () => {
           <div className={classes.content_results}>
             <h3 className={classes.content__heading3}>Hesaplamalar</h3>
             <div>
-              <TableBox submittedData={submittedData} />
+              <TableBox
+                submittedData={submittedData}
+                setSubmittedData={setSubmittedData}
+              />
             </div>
           </div>
         )}
