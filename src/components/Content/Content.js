@@ -95,7 +95,7 @@ const Content = () => {
 
   useEffect(() => {
     if (finalResponse.length !== 0) {
-      setPreSubmittedData({
+      const preSubmmitedData = {
         ID: selectedId,
         Year: selectedYear,
         Fuel: selectedFuel,
@@ -105,15 +105,17 @@ const Content = () => {
         CH4: finalResponse.CH4,
         N2O: finalResponse.N2O,
         CO2e: finalResponse.CO2e,
-      });
+      };
+      const newData = [...submittedData, preSubmmitedData];
+      setSubmittedData(newData);
     }
   }, [finalResponse]);
 
-  useEffect(() => {
-    if (Object.keys(preSubmmitedData).length !== 0) {
-      submittedData.push(preSubmmitedData);
-    }
-  }, [preSubmmitedData]);
+  // useEffect(() => {
+  //   if (Object.keys(preSubmmitedData).length !== 0) {
+  //     submittedData.push(preSubmmitedData);
+  //   }
+  // }, [preSubmmitedData]);
 
   const ResetHandler = () => {
     setSelectedId("");
