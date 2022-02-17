@@ -9,8 +9,10 @@ import Paper from "@material-ui/core/Paper";
 import useStyles from "./Style";
 import { Button } from "@material-ui/core";
 
-const TableBox = () => {
+const TableBox = ({ submittedData }) => {
   const classes = useStyles();
+
+  console.log("submitted2", submittedData);
 
   return (
     <div>
@@ -40,33 +42,39 @@ const TableBox = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
-              <TableCell align="center">
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <Button
-                    variant="contained"
-                    className={classes.calculator__button}
-                  >
-                    Sil
-                  </Button>
-                  <Button
-                    variant="contained"
-                    className={classes.calculator__button}
-                  >
-                    Düzenle
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
+            {submittedData.map((item) => {
+              return (
+                <TableRow key={item.ID}>
+                  <TableCell component="th" scope="row">
+                    {item.ID}
+                  </TableCell>
+                  <TableCell align="center">{item.Year}</TableCell>
+                  <TableCell align="center">{item.Fuel}</TableCell>
+                  <TableCell align="center">{item.Amount}</TableCell>
+                  <TableCell align="center">{item.unit}</TableCell>
+                  <TableCell align="center">{item.CO2}</TableCell>
+                  <TableCell align="center">{item.CH4}</TableCell>
+                  <TableCell align="center">{item.N2O}</TableCell>
+                  <TableCell align="center">{item.CO2e}</TableCell>
+                  <TableCell align="center">
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <Button
+                        variant="contained"
+                        className={classes.calculator__button}
+                      >
+                        Sil
+                      </Button>
+                      <Button
+                        variant="contained"
+                        className={classes.calculator__button}
+                      >
+                        Düzenle
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>

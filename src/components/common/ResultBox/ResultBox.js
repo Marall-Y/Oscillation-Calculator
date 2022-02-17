@@ -1,13 +1,19 @@
 import React from "react";
 import useStyles from "./Style";
 
-const ResultBox = ({ label, sub, second_label, third_label }) => {
+const ResultBox = ({ label, sub, second_label, third_label, finalData }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.row}>
       <span className={classes.span}>
-        <input className={classes.basic_slide} id="name" type="text" disabled />
+        <input
+          className={classes.basic_slide}
+          id="name"
+          type="text"
+          disabled
+          placeholder={finalData}
+        />
         <label htmlFor="name" className={classes.label}>
           {label}
           <sub>{sub}</sub>

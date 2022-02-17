@@ -1,21 +1,30 @@
 import ChevronBottom from "../../../images/chevron.png";
 import useStyles from "./Style";
 
-import React from "react";
+import React, { useState } from "react";
 
-const TextBox = ({ label }) => {
+const TextBox = ({ label, units, setAmount, setSelectedUnit }) => {
   const classes = useStyles();
+
+  const amountHandler = (event) => {
+    setAmount(event.target.value);
+  };
+
+  const unitHandler = (event) => {
+    setSelectedUnit(event.target.value);
+  };
 
   return (
     <div>
-      <label htmlFor="styledSelect1">
+      <label htmlFor="styledSelect3">
         {label}
         <div className={classes.custom_container}>
           <div className={classes.custom_select}>
             <input
-              id="styledSelect1"
+              id="styledSelect3"
               className={classes.select_options}
               placeholder="Giriniz"
+              onChange={(event) => amountHandler(event)}
             />
           </div>
           <div className={classes.custom_select2}>
@@ -23,22 +32,18 @@ const TextBox = ({ label }) => {
               id="styledSelect1"
               name="options"
               className={classes.select_options2}
+              onChange={unitHandler}
             >
               <option value="" className={classes.select_option}>
                 units
               </option>
-              <option value="1" className={classes.select_option}>
-                Option 1
-              </option>
-              <option value="2" className={classes.select_option}>
-                Option 2
-              </option>
-              <option value="3" className={classes.select_option}>
-                Option 3
-              </option>
-              <option value="4" className={classes.select_option}>
-                Option 4
-              </option>
+              {units.map((item, index) => {
+                return (
+                  <option className={classes.select_option} key={index}>
+                    {item}
+                  </option>
+                );
+              })}
             </select>
             <img src={ChevronBottom} className={classes.select_icon} />
           </div>
