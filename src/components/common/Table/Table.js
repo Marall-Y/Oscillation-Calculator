@@ -9,14 +9,16 @@ import Paper from "@material-ui/core/Paper";
 import useStyles from "./Style";
 import { Button } from "@material-ui/core";
 
-const TableBox = ({ submittedData, setSubmittedData }) => {
+const TableBox = ({ submittedData, setSubmittedData, setEditInput }) => {
   const classes = useStyles();
 
   const deleteHandler = (id) => {
-    // console.log("id", id);
-    // submittedData.map((item)=> console.log('optionid', item.ID))
     const newSubmitted = submittedData.filter((option) => option.ID !== id);
     setSubmittedData(newSubmitted);
+  };
+
+  const editHandler = (item) => {
+    setEditInput(item);
   };
 
   console.log("submitted2", submittedData);
@@ -75,6 +77,7 @@ const TableBox = ({ submittedData, setSubmittedData }) => {
                       <Button
                         variant="contained"
                         className={classes.calculator__button}
+                        onClick={() => editHandler(item)}
                       >
                         Düzenle
                       </Button>

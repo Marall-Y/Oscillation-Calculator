@@ -28,8 +28,8 @@ const Content = () => {
   const [selectedFuel, setSelectedFuel] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
   const [finalResponse, setFinalResponse] = useState([]);
-  const [preSubmmitedData, setPreSubmittedData] = useState({});
   const [submittedData, setSubmittedData] = useState([]);
+  const [editInput, setEditInput] = useState({});
 
   const classes = useStyles();
 
@@ -91,6 +91,14 @@ const Content = () => {
         });
       })
       .catch((error) => console.log(error));
+
+    setFacilityIds([]);
+    setYears([]);
+    setActivityTypes([]);
+    setFuelTypes([]);
+    setFuelSource([]);
+    setVehicleType([]);
+    document.getElementById("styledSelect3").value = "";
   };
 
   useEffect(() => {
@@ -101,6 +109,8 @@ const Content = () => {
         Fuel: selectedFuel,
         Amount: amount,
         unit: selectedUnit,
+        vehicle: selectedVehicle,
+        activity: selectedActivityType,
         CO2: finalResponse.CO2,
         CH4: finalResponse.CH4,
         N2O: finalResponse.N2O,
@@ -110,6 +120,18 @@ const Content = () => {
       setSubmittedData(newData);
     }
   }, [finalResponse]);
+
+  useEffect(() => {
+    if (Object.keys(editInput).length > 0) {
+      setSelectedId(editInput.ID);
+      setSelectedYear(editInput.Year);
+      setSelectedFuel(editInput.Fuel);
+      setSelectedVehicle(editInput.vehicle);
+      setSelectedActivityType(editInput.activity);
+      document.getElementById("styledSelect3").value = editInput.Amount;
+      setSelectedUnit(editInput.unit);
+    }
+  }, [editInput]);
 
   const ResetHandler = () => {
     setSelectedId("");
@@ -132,10 +154,10 @@ const Content = () => {
     setFinalResponse([]);
   };
 
-  console.log("presubmit", preSubmmitedData);
   console.log("submitted", submittedData);
   console.log("finalresponse", finalResponse);
   console.log("length", submittedData.length);
+  console.log("edit", editInput);
 
   return (
     <div className={classes.content}>
@@ -233,6 +255,7 @@ const Content = () => {
               <TableBox
                 submittedData={submittedData}
                 setSubmittedData={setSubmittedData}
+                setEditInput={setEditInput}
               />
             </div>
           </div>
