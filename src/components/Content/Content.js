@@ -5,6 +5,7 @@ import ResultBox from "../common/ResultBox/ResultBox";
 import TableBox from "../common/Table/Table";
 import TextBox from "../common/TextBox/TextBox";
 import Button from "@material-ui/core/Button";
+import { v4 as uuidv4 } from "uuid";
 import useStyles from "./Style";
 
 const Content = () => {
@@ -30,14 +31,15 @@ const Content = () => {
   const [finalResponse, setFinalResponse] = useState([]);
   const [submittedData, setSubmittedData] = useState([]);
   const [editInput, setEditInput] = useState({});
+  const [select, setSelect] = useState(null);
 
   const classes = useStyles();
 
   useEffect(() => {
+    setVehicleType([]);
     if (dataTypeId !== "") {
       fetch(
-        ` http://3.86.79.133/dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `,
-        { method: "GET" }
+        ` http://3.86.79.133/dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `
       ).then((response) => {
         response.json().then((data) => {
           setFuelTypes(data.data);
@@ -52,21 +54,37 @@ const Content = () => {
   }, [dataTypeId]);
 
   useEffect(() => {
+    setFuelSource([]);
     if (fuelTypes.length !== 0) {
-      fuelTypes.map((item) => fuelSource.push(item.name));
-      setFuelSource([...new Set(fuelSource)]);
+      const pushedData = [];
+      fuelTypes.map((item) => pushedData.push(item.name));
+      setFuelSource([...new Set(pushedData)]);
     }
-    if (fuelTypes.length !== 0) {
-      fuelTypes.map((item) => vehicleType.push(item.vehicle_type));
-      setVehicleType(vehicleType);
-    }
+
+    console.log("fuelSource", fuelSource);
   }, [fuelTypes]);
 
+  console.log("fuelSource", fuelSource);
+
   useEffect(() => {
+    setVehicleType([]);
+
+    if (fuelTypes.length !== 0) {
+      const filteredData = fuelTypes.filter(
+        (item) => item.name === selectedFuel
+      );
+      const sentData = [];
+      filteredData.map((item) => sentData.push(item.vehicle_type));
+      console.log("sentData", sentData);
+      setVehicleType(sentData);
+    }
+  }, [selectedFuel]);
+
+  useEffect(() => {
+    setUnits([]);
     if (dataTypeId !== "") {
       fetch(
-        ` http://3.86.79.133/dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `,
-        { method: "GET" }
+        ` http://3.86.79.133/dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `
       )
         .then((response) => {
           response.json().then((data) => {
@@ -85,8 +103,7 @@ const Content = () => {
 
   const submitHandler = (e) => {
     fetch(
-      ` http://3.86.79.133/dijital-mentorluk-backend/public/api/greenhouse-gas/mobile-combustion?activity_type=${selectedActivityType}&fuel_name=${selectedFuel}&amount=${amount}&unit=${selectedUnit}&vehicle_type=${selectedVehicle} `,
-      { method: "GET" }
+      ` http://3.86.79.133/dijital-mentorluk-backend/public/api/greenhouse-gas/mobile-combustion?activity_type=${selectedActivityType}&fuel_name=${selectedFuel}&amount=${amount}&unit=${selectedUnit}&vehicle_type=${selectedVehicle} `
     )
       .then((response) => {
         response.json().then((data) => {
@@ -94,19 +111,12 @@ const Content = () => {
         });
       })
       .catch((error) => console.log(error));
-
-    setFacilityIds([]);
-    setYears([]);
-    setActivityTypes([]);
-    setFuelTypes([]);
-    setFuelSource([]);
-    setVehicleType([]);
-    document.getElementById("styledSelect3").value = "";
   };
 
   useEffect(() => {
     if (finalResponse.length !== 0) {
       const preSubmmitedData = {
+        id: uuidv4(),
         ID: selectedId,
         Year: selectedYear,
         Fuel: selectedFuel,
@@ -124,38 +134,25 @@ const Content = () => {
     }
   }, [finalResponse]);
 
-  useEffect(() => {
-    if (Object.keys(editInput).length > 0) {
-      setSelectedId(editInput.ID);
-      setSelectedYear(editInput.Year);
-      setSelectedFuel(editInput.Fuel);
-      setSelectedVehicle(editInput.vehicle);
-      setSelectedActivityType(editInput.activity);
-      document.getElementById("styledSelect3").value = editInput.Amount;
-      setSelectedUnit(editInput.unit);
-    }
-  }, [editInput]);
-
   const ResetHandler = () => {
+    setSelect("");
     setSelectedId("");
-    setFacilityIds([]);
     setSelectedYear("");
-    setYears([]);
     setSelectedActivityType("");
-    setActivityTypes([]);
     setSelectedFuel("");
     setSelectedVehicle("");
     setSelectedUnit("");
-    setFuelTypes([]);
-    setFuelSource([]);
-    setVehicleType([]);
-    setUnitBox([]);
-    setUnits([]);
     setDataTypeId("");
     setAmount("");
     document.getElementById("styledSelect3").value = "";
     setFinalResponse([]);
+
+    setTimeout(() => {
+      setSelect(null);
+    }, 1000);
   };
+
+  console.log("edit", editInput);
 
   return (
     <div className={classes.content}>
@@ -179,22 +176,31 @@ const Content = () => {
                 label="Facility ID"
                 data={facilityIDs}
                 setValue={setSelectedId}
+                select={select}
               />
-              <SelectBox label="Year" data={years} setValue={setSelectedYear} />
+              <SelectBox
+                label="Year"
+                data={years}
+                setValue={setSelectedYear}
+                select={select}
+              />
               <SelectBox
                 label="Activity Type"
                 data={activityTypes}
                 setDataTypeId={setDataTypeId}
+                select={select}
               />
               <SelectBox
                 label="Fule Source"
                 data={fuelSource}
                 setValue={setSelectedFuel}
+                select={select}
               />
               <SelectBox
                 label="Vehicle Type"
                 data={vehicleType}
                 setValue={setSelectedVehicle}
+                select={select}
               />
               <TextBox
                 label="Amount of Activity"

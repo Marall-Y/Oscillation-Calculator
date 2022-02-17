@@ -13,7 +13,7 @@ const TableBox = ({ submittedData, setSubmittedData, setEditInput }) => {
   const classes = useStyles();
 
   const deleteHandler = (id) => {
-    const newSubmitted = submittedData.filter((option) => option.ID !== id);
+    const newSubmitted = submittedData.filter((option) => option.id !== id);
     setSubmittedData(newSubmitted);
   };
 
@@ -51,7 +51,7 @@ const TableBox = ({ submittedData, setSubmittedData, setEditInput }) => {
           <TableBody>
             {submittedData.map((item) => {
               return (
-                <TableRow key={item.ID}>
+                <TableRow key={item.id}>
                   <TableCell component="th" scope="row">
                     {item.ID}
                   </TableCell>
@@ -68,7 +68,7 @@ const TableBox = ({ submittedData, setSubmittedData, setEditInput }) => {
                       <Button
                         variant="contained"
                         className={classes.calculator__button}
-                        onClick={() => deleteHandler(item.ID)}
+                        onClick={() => deleteHandler(item.id)}
                       >
                         Sil
                       </Button>
