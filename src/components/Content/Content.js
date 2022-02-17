@@ -60,11 +60,7 @@ const Content = () => {
       fuelTypes.map((item) => pushedData.push(item.name));
       setFuelSource([...new Set(pushedData)]);
     }
-
-    console.log("fuelSource", fuelSource);
   }, [fuelTypes]);
-
-  console.log("fuelSource", fuelSource);
 
   useEffect(() => {
     setVehicleType([]);
@@ -75,7 +71,6 @@ const Content = () => {
       );
       const sentData = [];
       filteredData.map((item) => sentData.push(item.vehicle_type));
-      console.log("sentData", sentData);
       setVehicleType(sentData);
     }
   }, [selectedFuel]);
@@ -151,8 +146,6 @@ const Content = () => {
       setSelect(null);
     }, 1000);
   };
-
-  console.log("edit", editInput);
 
   return (
     <div className={classes.content}>
