@@ -21,8 +21,6 @@ const TableBox = ({ submittedData, setSubmittedData, setEditInput }) => {
     setEditInput(item);
   };
 
-  console.log("submitted2", submittedData);
-
   return (
     <div>
       <TableContainer component={Paper}>
