@@ -39,7 +39,7 @@ const Content = () => {
     setVehicleType([]);
     if (dataTypeId !== "") {
       fetch(
-        ` http://3.86.79.133/dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `
+        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `
       ).then((response) => {
         response.json().then((data) => {
           setFuelTypes(data.data);
@@ -79,7 +79,7 @@ const Content = () => {
     setUnits([]);
     if (dataTypeId !== "") {
       fetch(
-        ` http://3.86.79.133/dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `
+        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `
       )
         .then((response) => {
           response.json().then((data) => {
@@ -98,7 +98,7 @@ const Content = () => {
 
   const submitHandler = (e) => {
     fetch(
-      ` http://3.86.79.133/dijital-mentorluk-backend/public/api/greenhouse-gas/mobile-combustion?activity_type=${selectedActivityType}&fuel_name=${selectedFuel}&amount=${amount}&unit=${selectedUnit}&vehicle_type=${selectedVehicle} `
+      ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/greenhouse-gas/mobile-combustion?activity_type=${selectedActivityType}&fuel_name=${selectedFuel}&amount=${amount}&unit=${selectedUnit}&vehicle_type=${selectedVehicle} `
     )
       .then((response) => {
         response.json().then((data) => {
