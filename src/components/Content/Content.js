@@ -31,7 +31,7 @@ const Content = () => {
   const [finalResponse, setFinalResponse] = useState([]);
   const [submittedData, setSubmittedData] = useState([]);
   const [editInput, setEditInput] = useState({});
-  const [select, setSelect] = useState(null);
+  const [select, setSelect] = useState(undefined);
 
   const classes = useStyles();
 
@@ -143,7 +143,7 @@ const Content = () => {
     setFinalResponse([]);
 
     setTimeout(() => {
-      setSelect(null);
+      setSelect(undefined);
     }, 1000);
   };
 
