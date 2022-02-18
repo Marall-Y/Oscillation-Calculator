@@ -41,7 +41,7 @@ const Content = () => {
       fetch(
         ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
