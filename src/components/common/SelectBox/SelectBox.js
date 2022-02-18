@@ -15,8 +15,6 @@ const SelectBox = ({ label, data, setDataTypeId, setValue, select }) => {
     }
   };
 
-  console.log("data", data);
-
   return (
     <div>
       <label htmlFor="styledSelect1">
