@@ -39,7 +39,14 @@ const Content = () => {
     setVehicleType([]);
     if (dataTypeId !== "") {
       fetch(
-        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `
+        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/fuel-type?data_type_id=${dataTypeId} `,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       ).then((response) => {
         response.json().then((data) => {
           setFuelTypes(data.data);
@@ -79,7 +86,14 @@ const Content = () => {
     setUnits([]);
     if (dataTypeId !== "") {
       fetch(
-        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `
+        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       )
         .then((response) => {
           response.json().then((data) => {
@@ -98,7 +112,14 @@ const Content = () => {
 
   const submitHandler = (e) => {
     fetch(
-      ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/greenhouse-gas/mobile-combustion?activity_type=${selectedActivityType}&fuel_name=${selectedFuel}&amount=${amount}&unit=${selectedUnit}&vehicle_type=${selectedVehicle} `
+      ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/greenhouse-gas/mobile-combustion?activity_type=${selectedActivityType}&fuel_name=${selectedFuel}&amount=${amount}&unit=${selectedUnit}&vehicle_type=${selectedVehicle} `,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     )
       .then((response) => {
         response.json().then((data) => {
