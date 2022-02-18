@@ -185,9 +185,6 @@ const Content = () => {
               Lütfen salınım değerlerini hesaplamak için aşağıdaki alanları
               doldurun:
             </p>
-            <a href="http://3.86.79.133/dijital-mentorluk-backend/public/api/fuel-type?data_type_id=4">
-              salam
-            </a>
             <div className={classes.calculator__selectBoxes}>
               <SelectBox
                 label="Facility ID"
