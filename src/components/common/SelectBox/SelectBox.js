@@ -15,7 +15,7 @@ const SelectBox = ({ label, data, setDataTypeId, setValue, select }) => {
     }
   };
 
-  console.log("data", data);
+  console.log("dataa", data);
 
   return (
     <div>
