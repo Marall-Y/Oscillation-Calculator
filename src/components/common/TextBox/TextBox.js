@@ -3,7 +3,14 @@ import useStyles from "./Style";
 
 import React, { useState } from "react";
 
-const TextBox = ({ label, units, setAmount, setSelectedUnit }) => {
+const TextBox = ({
+  label,
+  units,
+  setAmount,
+  setSelectedUnit,
+  amount,
+  selectedUnit,
+}) => {
   const classes = useStyles();
 
   const amountHandler = (event) => {
@@ -21,6 +28,7 @@ const TextBox = ({ label, units, setAmount, setSelectedUnit }) => {
         <div className={classes.custom_container}>
           <div className={classes.custom_select}>
             <input
+              value={amount}
               id="styledSelect3"
               className={classes.select_options}
               placeholder="Giriniz"
@@ -29,6 +37,8 @@ const TextBox = ({ label, units, setAmount, setSelectedUnit }) => {
           </div>
           <div className={classes.custom_select2}>
             <select
+              value={selectedUnit}
+              label={selectedUnit}
               id="styledSelect1"
               name="options"
               className={classes.select_options2}

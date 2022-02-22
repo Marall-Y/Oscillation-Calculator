@@ -12,26 +12,26 @@ const Content = () => {
   const [facilityIDs, setFacilityIds] = useState([1, 2, 3, 4]);
   const [years, setYears] = useState([1994, 1998, 2002, 2009, 2016, 2022]);
   const [activityTypes, setActivityTypes] = useState([
-    { id: 4, type: "Distance Activity" },
-    { id: 5, type: "Fuel Use" },
+    "distanceActivity",
+    "fuelUse",
   ]);
-  const [selectedActivityType, setSelectedActivityType] = useState("");
   const [fuelTypes, setFuelTypes] = useState([]);
   const [fuelSource, setFuelSource] = useState([]);
   const [vehicleType, setVehicleType] = useState([]);
   const [unitBox, setUnitBox] = useState([]);
   const [units, setUnits] = useState([]);
-  const [selectedUnit, setSelectedUnit] = useState("");
   const [dataTypeId, setDataTypeId] = useState("");
-  const [amount, setAmount] = useState("");
+  const [finalResponse, setFinalResponse] = useState([]);
+  const [submittedData, setSubmittedData] = useState([]);
+  const [editInput, setEditInput] = useState({});
+  const [selectedActivityType, setSelectedActivityType] = useState("");
+  const [selectedUnit, setSelectedUnit] = useState("");
   const [selectedId, setSelectedId] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
   const [selectedFuel, setSelectedFuel] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState("");
-  const [finalResponse, setFinalResponse] = useState([]);
-  const [submittedData, setSubmittedData] = useState([]);
-  const [editInput, setEditInput] = useState({});
-  const [select, setSelect] = useState(undefined);
+  const [amount, setAmount] = useState("");
+  const [resetOption, setResetOption] = useState("");
 
   const classes = useStyles();
 
@@ -54,9 +54,31 @@ const Content = () => {
       });
     }
     if (dataTypeId === 4) {
-      setSelectedActivityType("distanceActivity ");
+      setSelectedActivityType("distanceActivity");
     } else if (dataTypeId === 5) {
       setSelectedActivityType("fuelUse");
+    }
+  }, [dataTypeId, editInput]);
+
+  useEffect(() => {
+    setUnits([]);
+    if (dataTypeId !== "") {
+      fetch(
+        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((response) => {
+          response.json().then((data) => {
+            setUnitBox(data.data);
+          });
+        })
+        .catch((error) => console.log(error));
     }
   }, [dataTypeId]);
 
@@ -81,28 +103,6 @@ const Content = () => {
       setVehicleType(sentData);
     }
   }, [selectedFuel]);
-
-  useEffect(() => {
-    setUnits([]);
-    if (dataTypeId !== "") {
-      fetch(
-        ` ${process.env.REACT_APP_API}dijital-mentorluk-backend/public/api/unit?data_type_id=${dataTypeId} `,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => {
-          response.json().then((data) => {
-            setUnitBox(data.data);
-          });
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [dataTypeId]);
 
   useEffect(() => {
     if (unitBox.length > 0) {
@@ -131,9 +131,11 @@ const Content = () => {
 
   useEffect(() => {
     if (finalResponse.length !== 0) {
+      const id = editInput.id ? editInput.id : uuidv4();
       const preSubmmitedData = {
-        id: uuidv4(),
+        id: id,
         ID: selectedId,
+        dataTypeId: dataTypeId,
         Year: selectedYear,
         Fuel: selectedFuel,
         Amount: amount,
@@ -145,13 +147,33 @@ const Content = () => {
         N2O: finalResponse.N2O,
         CO2e: finalResponse.CO2e,
       };
-      const newData = [...submittedData, preSubmmitedData];
-      setSubmittedData(newData);
+
+      if (submittedData.length > 0) {
+        const toBeEdited = submittedData.find(
+          (item) => item.id === preSubmmitedData.id
+        );
+        if (toBeEdited) {
+          let foundIndex = submittedData.findIndex(
+            (x) => x.id == toBeEdited.id
+          );
+          submittedData[foundIndex] = preSubmmitedData;
+          const newData = [...submittedData];
+          setSubmittedData(newData);
+        } else {
+          const newData = [...submittedData, preSubmmitedData];
+          setSubmittedData(newData);
+        }
+      } else {
+        const newData = [...submittedData, preSubmmitedData];
+        setSubmittedData(newData);
+      }
     }
   }, [finalResponse]);
 
+  console.log("submittedData", submittedData);
+
   const ResetHandler = () => {
-    setSelect("");
+    setResetOption("");
     setSelectedId("");
     setSelectedYear("");
     setSelectedActivityType("");
@@ -162,11 +184,20 @@ const Content = () => {
     setAmount("");
     document.getElementById("styledSelect3").value = "";
     setFinalResponse([]);
-
-    setTimeout(() => {
-      setSelect(undefined);
-    }, 1000);
   };
+
+  useEffect(() => {
+    if (Object.keys(editInput).length > 0) {
+      setDataTypeId(editInput.dataTypeId);
+      setSelectedId(editInput.ID);
+      setSelectedYear(editInput.Year);
+      setSelectedFuel(editInput.Fuel);
+      setSelectedVehicle(editInput.vehicle);
+      setSelectedActivityType(editInput.activity);
+      setAmount(editInput.Amount);
+      setSelectedUnit(editInput.unit);
+    }
+  }, [editInput]);
 
   return (
     <div className={classes.content}>
@@ -190,37 +221,45 @@ const Content = () => {
                 label="Facility ID"
                 data={facilityIDs}
                 setValue={setSelectedId}
-                select={select}
+                selectedId={selectedId}
+                resetOption={resetOption}
               />
               <SelectBox
                 label="Year"
                 data={years}
                 setValue={setSelectedYear}
-                select={select}
+                selectedYear={selectedYear}
+                resetOption={resetOption}
               />
               <SelectBox
                 label="Activity Type"
                 data={activityTypes}
                 setDataTypeId={setDataTypeId}
-                select={select}
+                selectedActivityType={selectedActivityType}
+                resetOption={resetOption}
               />
               <SelectBox
                 label="Fule Source"
                 data={fuelSource}
                 setValue={setSelectedFuel}
-                select={select}
+                selectedFuel={selectedFuel}
+                resetOption={resetOption}
               />
               <SelectBox
                 label="Vehicle Type"
                 data={vehicleType}
                 setValue={setSelectedVehicle}
-                select={select}
+                selectedVehicle={selectedVehicle}
+                resetOption={resetOption}
               />
               <TextBox
                 label="Amount of Activity"
                 units={units}
                 setAmount={setAmount}
+                amount={amount}
                 setSelectedUnit={setSelectedUnit}
+                selectedUnit={selectedUnit}
+                resetOption={resetOption}
               />
             </div>
           </div>
@@ -231,19 +270,31 @@ const Content = () => {
               aşağıdaki gibidir:
             </p>
             <div className={classes.calculator__resultBoxes}>
-              <ResultBox label="CO" sub="2" finalData={finalResponse.CO2} />
-              <ResultBox label="CH" sub="4" finalData={finalResponse.CH4} />
+              <ResultBox
+                label="CO"
+                sub="2"
+                finalData={finalResponse.CO2}
+                CO2={editInput.CO2}
+              />
+              <ResultBox
+                label="CH"
+                sub="4"
+                finalData={finalResponse.CH4}
+                CH4={editInput.CH4}
+              />
               <ResultBox
                 label="N"
                 sub="2"
                 second_label="O"
                 finalData={finalResponse.N2O}
+                CH4={editInput.N2O}
               />
               <ResultBox
                 label="CO"
                 sub="2"
                 third_label="e"
                 finalData={finalResponse.CO2e}
+                CH4={editInput.CO2e}
               />
             </div>
             <div className={classes.calculator__buttons}>

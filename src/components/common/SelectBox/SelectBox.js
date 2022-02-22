@@ -2,20 +2,35 @@ import useStyles from "./Style";
 import ChevronBottom from "../../../images/chevron.png";
 import React, { useState, useEffect } from "react";
 
-const SelectBox = ({ label, data, setDataTypeId, setValue, select }) => {
+const SelectBox = ({
+  label,
+  data,
+  setDataTypeId,
+  setValue,
+  selectedId,
+  selectedYear,
+  selectedActivityType,
+  selectedFuel,
+  selectedVehicle,
+  resetOption,
+}) => {
   const classes = useStyles();
 
   const typeIdHandler = (event) => {
-    if (event.target.value === "Distance Activity") {
+    if (event.target.value === "distanceActivity") {
       setDataTypeId(4);
-    } else if (event.target.value === "Fuel Use") {
+    } else if (event.target.value === "fuelUse") {
       setDataTypeId(5);
     } else {
       setValue(event.target.value);
     }
   };
 
-  console.log("dataa", data);
+  console.log("id", selectedId);
+  console.log("year", selectedYear);
+  console.log("avtivity", selectedActivityType);
+  console.log("fuel", selectedFuel);
+  console.log("vehicle", selectedVehicle);
 
   return (
     <div>
@@ -23,7 +38,14 @@ const SelectBox = ({ label, data, setDataTypeId, setValue, select }) => {
         {label}
         <div className={classes.custom_select}>
           <select
-            value={select}
+            value={
+              selectedId ||
+              selectedYear ||
+              selectedVehicle ||
+              selectedActivityType ||
+              selectedFuel ||
+              resetOption
+            }
             id="styledSelect1"
             name="options"
             className={classes.select_options}
@@ -35,7 +57,7 @@ const SelectBox = ({ label, data, setDataTypeId, setValue, select }) => {
             {data.map((item, index) => {
               return (
                 <option className={classes.select_option} key={index}>
-                  {item.type || item}
+                  {item}
                 </option>
               );
             })}

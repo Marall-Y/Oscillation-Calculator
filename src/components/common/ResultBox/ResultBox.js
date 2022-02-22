@@ -1,7 +1,17 @@
 import React from "react";
 import useStyles from "./Style";
 
-const ResultBox = ({ label, sub, second_label, third_label, finalData }) => {
+const ResultBox = ({
+  label,
+  sub,
+  second_label,
+  third_label,
+  finalData,
+  CO2,
+  CH4,
+  N2O,
+  CO2E,
+}) => {
   const classes = useStyles();
 
   return (
@@ -9,6 +19,7 @@ const ResultBox = ({ label, sub, second_label, third_label, finalData }) => {
       <span className={classes.span}>
         <input
           className={classes.basic_slide}
+          value={CO2 || CH4 || N2O || CO2E}
           id="name"
           type="text"
           disabled
